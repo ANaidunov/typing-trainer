@@ -1,0 +1,13 @@
+.words-ticker {
+  display: flex;
+  justify-content: center;
+
+  line-height: 2em;
+  font-size: large;
+}
+
+::ng-deep {
+  .highlighted-text {
+    color: greenyellow;
+  }
+}
