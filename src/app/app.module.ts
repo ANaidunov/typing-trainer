@@ -7,6 +7,10 @@ import { TickerComponent } from '../components/ticker/ticker.component';
 import { HighlighterPipe } from '../pipes/highlighter.pipe';
 import { KeyboardMonitorComponent } from '../components/keyboard-monitor/keyboard-monitor.component';
 import { KeyComponent } from '../components/keyboard-monitor/key/key.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { AppEffects } from './app.effects';
 
 @NgModule({
   declarations: [
@@ -18,7 +22,11 @@ import { KeyComponent } from '../components/keyboard-monitor/key/key.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    StoreModule.forRoot(reducers, {
+      metaReducers
+    }),
+    EffectsModule.forRoot([AppEffects])
   ],
   providers: [],
   bootstrap: [AppComponent]
