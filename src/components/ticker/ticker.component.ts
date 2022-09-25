@@ -8,8 +8,9 @@ import randomWords from 'random-words';
 })
 export class TickerComponent implements OnInit {
   wordsCount = 5;
-  wordsToType: string = '';
+  wordsToType = '';
   alreadyTypedString = '';
+  errorCharPosition = -1;
   currentCursorPosition = 0;
 
   constructor() {}
@@ -18,13 +19,15 @@ export class TickerComponent implements OnInit {
   onKeyDownHandler(event: KeyboardEvent) {
     if (this.currentCursorPosition >= this.wordsToType.length) {
       this.generateWords();
-      this.alreadyTypedString = '';
-      this.currentCursorPosition = 0;
+      this.initValues();
     }
     if (this.wordsToType[this.currentCursorPosition] === event.key) {
       this.currentCursorPosition++;
       this.alreadyTypedString = this.wordsToType.slice(0, this.currentCursorPosition);
-
+      this.errorCharPosition = -1;
+    }
+    else {
+      this.errorCharPosition = this.currentCursorPosition;
     }
   }
 
@@ -34,5 +37,12 @@ export class TickerComponent implements OnInit {
 
   generateWords() {
     this.wordsToType = randomWords(this.wordsCount).join(' ');
+  }
+
+  private initValues() {
+    this.generateWords();
+    this.alreadyTypedString = '';
+    this.errorCharPosition = -1;
+    this.currentCursorPosition = 0;
   }
 }

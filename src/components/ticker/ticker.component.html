@@ -1,4 +1,4 @@
-<p
+<pre
   class="words-ticker"
-  [innerHtml]="wordsToType | highlighter:alreadyTypedString"
-></p>
+  [innerHtml]="wordsToType | highlighter:alreadyTypedString:errorCharPosition"
+></pre>

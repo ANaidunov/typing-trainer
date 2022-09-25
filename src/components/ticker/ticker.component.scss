@@ -4,10 +4,15 @@
 
   line-height: 2em;
   font-size: large;
+  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
 }
 
 ::ng-deep {
   .highlighted-text {
     color: greenyellow;
+  }
+
+  .error-char {
+    color: red;
   }
 }

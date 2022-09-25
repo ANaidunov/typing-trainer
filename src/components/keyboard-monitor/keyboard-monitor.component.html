@@ -1,0 +1,9 @@
+<div
+  *ngFor="let keyRow of keyRows"
+  class="key-row"
+>
+  <app-key
+    *ngFor="let key of keyRow"
+    [key]="key"
+  ></app-key>
+</div>
