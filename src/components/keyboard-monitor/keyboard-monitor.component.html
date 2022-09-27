@@ -1,5 +1,5 @@
 <div
-  *ngFor="let keyRow of keyRows"
+  *ngFor="let keyRow of keyRows$ | async"
   class="key-row"
 >
   <app-key

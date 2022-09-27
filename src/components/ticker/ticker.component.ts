@@ -1,5 +1,7 @@
 import { Component, ElementRef, HostListener, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
 import randomWords from 'random-words';
+import { setNextTypedKey } from 'src/app/store/keyboard/keyboard.actions';
 
 @Component({
   selector: 'app-ticker',
@@ -13,7 +15,7 @@ export class TickerComponent implements OnInit {
   errorCharPosition = -1;
   currentCursorPosition = 0;
 
-  constructor() {}
+  constructor(private store: Store) {}
 
   @HostListener('document:keydown', ['$event'])
   onKeyDownHandler(event: KeyboardEvent) {
@@ -25,6 +27,7 @@ export class TickerComponent implements OnInit {
       this.currentCursorPosition++;
       this.alreadyTypedString = this.wordsToType.slice(0, this.currentCursorPosition);
       this.errorCharPosition = -1;
+      this.store.dispatch(setNextTypedKey({ pressedKey: this.wordsToType.charAt(this.currentCursorPosition) }));
     }
     else {
       this.errorCharPosition = this.currentCursorPosition;
@@ -33,6 +36,7 @@ export class TickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateWords();
+    this.store.dispatch(setNextTypedKey({ pressedKey: this.wordsToType.charAt(0) }));
   }
 
   generateWords() {
