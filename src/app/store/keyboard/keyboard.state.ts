@@ -3,7 +3,8 @@ import { KeyboardKey, KeyboardRow } from "src/components/keyboard-monitor/keyboa
 
 export interface KeyboardState {
   nextKeyToType?: KeyboardKey;
-  keyRows: KeyboardRow[]
+  typedKey?: KeyboardKey;
+  keyRows: KeyboardRow[];
 };
 
 export const initialState: KeyboardState = {
@@ -18,9 +19,9 @@ export const initialState: KeyboardState = {
       { key: 'y', isHighlighted: false },
       { key: 'u', isHighlighted: false },
       { key: 'i', isHighlighted: false },
-      { key: 'o', isHighlighted: false },],
+      { key: 'o', isHighlighted: false },
+      { key: 'p', isHighlighted: false },],
     [
-      { key: 'p', isHighlighted: false },
       { key: 'a', isHighlighted: false },
       { key: 's', isHighlighted: false },
       { key: 'd', isHighlighted: false },

@@ -1,26 +1,35 @@
 import { createReducer, on } from "@ngrx/store";
-import { setNextTypedKey } from "./keyboard.actions";
+import { KeyboardRow } from "src/components/keyboard-monitor/keyboard-monitor.component";
+import { setKeyState } from "./keyboard.actions";
 import { initialState, KeyboardState } from "./keyboard.state";
 
 export const keyboardReducer = createReducer(initialState,
-  on(setNextTypedKey, (state: KeyboardState, { pressedKey }) => {
-    const nextPressedKeyName = pressedKey === ' ' ? 'Space' : pressedKey;
-    const keyRows = state.keyRows.map(row => {
-      const newRow = [...row];
-      const pressedKeyIndex = newRow.findIndex(key => key.key === nextPressedKeyName);
-      const pressedKeyOnKeyboard = newRow[pressedKeyIndex];
+  on(setKeyState, (state: KeyboardState, { pressedKey }) => {
+    const keyToSet = pressedKey.key === ' ' ? { ...pressedKey, key: 'Space' } : pressedKey;
 
-      if (pressedKeyOnKeyboard) {
-        newRow[pressedKeyIndex] = { ...pressedKeyOnKeyboard, isHighlighted: true };
+    let changedRow: KeyboardRow | undefined;
+    const keyRowToChangeIndex = state.keyRows.findIndex(row => {
+      const nextKeyIndex = row.findIndex(key => key.key === keyToSet.key);
+      const nextKeyOnKeyboard = row[nextKeyIndex];
+
+      if (nextKeyOnKeyboard) {
+        changedRow = [...row];
+        changedRow[nextKeyIndex] = keyToSet;
+        return true;
       }
 
-      return pressedKeyOnKeyboard ? newRow : row;
+      return false;
     });
 
     const newState = {
       ...state,
-      keyRows: [...keyRows]
     };
+
+    if (keyRowToChangeIndex > -1 && changedRow) {
+      const keyRows = [...state.keyRows];
+      keyRows[keyRowToChangeIndex] = changedRow;
+      newState.keyRows = keyRows;
+    }
 
     return newState;
   }));

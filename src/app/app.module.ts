@@ -10,9 +10,9 @@ import { KeyComponent } from '../components/keyboard-monitor/key/key.component';
 import { StoreModule } from '@ngrx/store';
 import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
-import { AppEffects } from './app.effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
+import { TimerEffects } from './store/timer/timer.effects';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ import { environment } from '../environments/environment';
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([AppEffects]),
+    EffectsModule.forRoot([TimerEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],
