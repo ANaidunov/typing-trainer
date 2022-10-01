@@ -14,6 +14,6 @@ export class TimerEffects {
     filter(x => {
       return x.value.type !== startTimer.type;
     }),
-    tap(({ interval }) => console.log(new Date(interval).toTimeString()))
+    tap(({ interval }) => console.log(`time is ${interval / 1000} s`))
   ), { dispatch: false });
 }
