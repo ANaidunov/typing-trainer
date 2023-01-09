@@ -41,7 +41,7 @@ export const initialState: KeyboardState = {
       { key: 'm', isHighlighted: false },],
     [
       { key: 'Space', isHighlighted: false }]
-  ]
+  ],
 };
 
 export const featureSelector = createFeatureSelector<KeyboardState>('keyboard');

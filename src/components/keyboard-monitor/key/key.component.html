@@ -1,4 +1,5 @@
 <div
   class="key"
-  [class]="key?.isHighlighted ? 'highlighted-key' : ''"
+  [class.highlighted-key]="key?.isHighlighted"
+  [class.typed-key]="key?.isTyped"
 >{{key?.key}}</div>

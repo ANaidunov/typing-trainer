@@ -1,10 +1,43 @@
+$initial-input-color: #ababab;
+$highlighted-input-color: #3ffe4b;
+$border-input-color: #3b9aff;
+
+:host,
 .words-ticker {
   display: flex;
   justify-content: center;
+}
 
+.words-ticker {
+  padding: 0 10%;
+  white-space: normal;
+  text-align: center;
+
+  background-color: $initial-input-color;
+  border: 1px solid $border-input-color;
+  border-radius: 2px;
   line-height: 2em;
   font-size: large;
-  font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+
+    &.highlighted {
+      animation-name: highlightInput;
+      animation-duration: 1s;
+    }
+  }
+
+  @keyframes highlightInput {
+    0% {
+      background-color: $initial-input-color;
+    }
+
+    50% {
+      background-color: $highlighted-input-color;
+    }
+
+    100% {
+      background-color: $initial-input-color;
+    }
 }
 
 ::ng-deep {

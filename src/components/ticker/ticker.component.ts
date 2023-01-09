@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import randomWords from 'random-words';
-import { setKeyState } from 'src/app/store/keyboard/keyboard.actions';
+import { setKeyState, setTypedKeyState } from 'src/app/store/keyboard/keyboard.actions';
 import { startTimer, stopTimer } from 'src/app/store/timer/timer.actions';
 
 @Component({
@@ -16,6 +16,7 @@ export class TickerComponent implements OnInit {
   alreadyTypedString = '';
   errorCharPosition = -1;
   currentCursorPosition = 0;
+  isTickerHighlighted = false;
 
   constructor(private store: Store) {}
 
@@ -23,8 +24,8 @@ export class TickerComponent implements OnInit {
   onKeyDownHandler(event: KeyboardEvent) {
     if (this.currentCursorPosition >= this.wordsToType.length) {
       this.store.dispatch(stopTimer());
-      this.generateWords();
       this.initValues();
+      this.highlightKey(this.wordsToType.charAt(this.currentCursorPosition));
     }
     if (this.wordsToType[this.currentCursorPosition] === event.key) {
       this.unHighlightKey(this.wordsToType.charAt(this.currentCursorPosition));
@@ -32,10 +33,15 @@ export class TickerComponent implements OnInit {
       this.alreadyTypedString = this.wordsToType.slice(0, this.currentCursorPosition);
       this.errorCharPosition = -1;
       this.highlightKey(this.wordsToType.charAt(this.currentCursorPosition));
+      this.pushKeyButton(event.key);
     }
     else {
+      this.pushKeyButton(event.key);
       this.errorCharPosition = this.currentCursorPosition;
     }
+
+    event.stopPropagation();
+    event.preventDefault();
   }
 
   ngOnInit(): void {
@@ -56,10 +62,16 @@ export class TickerComponent implements OnInit {
     this.store.dispatch(setKeyState({ pressedKey: { key, isHighlighted: false } }));
   }
 
+  pushKeyButton(key: string) {
+    this.store.dispatch(setTypedKeyState({ pressedKey: { key: key } }));
+  }
+
   private initValues() {
     this.generateWords();
     this.alreadyTypedString = '';
     this.errorCharPosition = -1;
     this.currentCursorPosition = 0;
+
+    this.isTickerHighlighted = !this.isTickerHighlighted;
   }
 }

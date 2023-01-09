@@ -1,4 +1,5 @@
 <pre
   class="words-ticker"
+  [class.highlighted]="isTickerHighlighted"
   [innerHtml]="wordsToType | highlighter:alreadyTypedString:errorCharPosition"
 ></pre>

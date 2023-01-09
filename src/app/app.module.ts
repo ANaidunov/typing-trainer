@@ -1,3 +1,4 @@
+import { KeyboardEffects } from './store/keyboard/keyboard.effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
@@ -28,7 +29,7 @@ import { TimerEffects } from './store/timer/timer.effects';
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([TimerEffects]),
+    EffectsModule.forRoot([TimerEffects, KeyboardEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

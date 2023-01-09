@@ -1,5 +1,4 @@
 import { createFeatureSelector, createReducer, createSelector } from "@ngrx/store";
-import { TimeInterval } from "rxjs";
 
 export interface TimerState {
   time: number;

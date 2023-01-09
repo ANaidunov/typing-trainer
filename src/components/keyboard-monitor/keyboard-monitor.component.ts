@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { KeyboardState, keyRowsSelector } from 'src/app/store/keyboard/keyboard.state';
 
-export type KeyboardKey = { key: string, isHighlighted: boolean };
+export type KeyboardKey = { key: string, isHighlighted?: boolean, isTyped?: boolean };
 export type KeyboardRow = KeyboardKey[];
 @Component({
   selector: 'app-keyboard-monitor',
