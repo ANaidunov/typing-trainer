@@ -21,9 +21,7 @@ export const keyboardReducer = createReducer(initialState,
       return false;
     });
 
-    const newState = {
-      ...state,
-    };
+    const newState = { ...state };
 
     if (keyRowToChangeIndex > -1 && changedRow) {
       const keyRows = [...state.keyRows];

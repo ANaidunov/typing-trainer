@@ -5,6 +5,7 @@ export interface KeyboardState {
   nextKeyToType?: KeyboardKey;
   typedKey?: KeyboardKey;
   keyRows: KeyboardRow[];
+  stringToType: string;
 };
 
 export const initialState: KeyboardState = {
@@ -42,6 +43,7 @@ export const initialState: KeyboardState = {
     [
       { key: 'Space', isHighlighted: false }]
   ],
+  stringToType: '',
 };
 
 export const featureSelector = createFeatureSelector<KeyboardState>('keyboard');

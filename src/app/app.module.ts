@@ -13,7 +13,7 @@ import { reducers, metaReducers } from './reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { TimerEffects } from './store/timer/timer.effects';
+import { StatisticsEffects } from './store/statistics/statistics.effects';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { TimerEffects } from './store/timer/timer.effects';
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
-    EffectsModule.forRoot([TimerEffects, KeyboardEffects]),
+    EffectsModule.forRoot([StatisticsEffects, KeyboardEffects]),
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production })
   ],
   providers: [],

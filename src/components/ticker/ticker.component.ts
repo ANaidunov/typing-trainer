@@ -2,7 +2,7 @@ import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } 
 import { Store } from '@ngrx/store';
 import randomWords from 'random-words';
 import { setKeyState, setTypedKeyState } from 'src/app/store/keyboard/keyboard.actions';
-import { startTimer, stopTimer } from 'src/app/store/timer/timer.actions';
+import { setStringLength, startTimer, stopTimer } from 'src/app/store/statistics/statistics.actions';
 
 @Component({
   selector: 'app-ticker',
@@ -12,7 +12,7 @@ import { startTimer, stopTimer } from 'src/app/store/timer/timer.actions';
 })
 export class TickerComponent implements OnInit {
   wordsCount = 5;
-  wordsToType = '';
+  stringToType = '';
   alreadyTypedString = '';
   errorCharPosition = -1;
   currentCursorPosition = 0;
@@ -22,17 +22,17 @@ export class TickerComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   onKeyDownHandler(event: KeyboardEvent) {
-    if (this.currentCursorPosition >= this.wordsToType.length) {
+    if (this.currentCursorPosition >= this.stringToType.length) {
       this.store.dispatch(stopTimer());
       this.initValues();
-      this.highlightKey(this.wordsToType.charAt(this.currentCursorPosition));
+      this.highlightKey(this.stringToType.charAt(this.currentCursorPosition));
     }
-    if (this.wordsToType[this.currentCursorPosition] === event.key) {
-      this.unHighlightKey(this.wordsToType.charAt(this.currentCursorPosition));
+    if (this.stringToType[this.currentCursorPosition] === event.key) {
+      this.unHighlightKey(this.stringToType.charAt(this.currentCursorPosition));
       this.currentCursorPosition++;
-      this.alreadyTypedString = this.wordsToType.slice(0, this.currentCursorPosition);
+      this.alreadyTypedString = this.stringToType.slice(0, this.currentCursorPosition);
       this.errorCharPosition = -1;
-      this.highlightKey(this.wordsToType.charAt(this.currentCursorPosition));
+      this.highlightKey(this.stringToType.charAt(this.currentCursorPosition));
       this.pushKeyButton(event.key);
     }
     else {
@@ -46,11 +46,13 @@ export class TickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateWords();
-    this.highlightKey(this.wordsToType.charAt(this.currentCursorPosition));
+    this.highlightKey(this.stringToType.charAt(this.currentCursorPosition));
   }
 
   generateWords() {
-    this.wordsToType = randomWords(this.wordsCount).join(' ');
+    const wordsToType = randomWords(this.wordsCount);
+    this.stringToType = wordsToType.join(' ');
+    this.store.dispatch(setStringLength({ length: wordsToType.join('').length }));
     this.store.dispatch(startTimer());
   }
 
