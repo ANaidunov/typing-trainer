@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 import { KeyboardKey } from '../keyboard-monitor.component';
 
 @Component({
@@ -7,13 +7,7 @@ import { KeyboardKey } from '../keyboard-monitor.component';
   styleUrls: ['./key.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class KeyComponent implements OnInit {
+export class KeyComponent {
 
   @Input() key?: KeyboardKey;
-
-  constructor() {}
-
-  ngOnInit(): void {
-  }
-
 }

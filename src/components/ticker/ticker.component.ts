@@ -1,7 +1,7 @@
 import { incrementCurrentSymbolsCount, resetCurrentSymbolsCount } from './../../app/store/statistics/statistics.actions';
-import { Observable, Subscription } from 'rxjs';
+import { Observable } from 'rxjs';
 import { alreadyTypedSymbolsCountSelector, wordsLengthSelector } from './../../app/store/statistics/statistics.state';
-import { ChangeDetectionStrategy, Component, HostListener, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component, HostListener, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import randomWords from 'random-words';
 import { setKeyState, setTypedKeyState } from 'src/app/store/keyboard/keyboard.actions';

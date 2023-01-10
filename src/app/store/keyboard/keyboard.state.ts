@@ -1,4 +1,4 @@
-import { createFeatureSelector, createReducer, createSelector } from "@ngrx/store";
+import { createFeatureSelector, createSelector } from "@ngrx/store";
 import { KeyboardKey, KeyboardRow } from "src/components/keyboard-monitor/keyboard-monitor.component";
 
 export interface KeyboardState {
@@ -6,7 +6,7 @@ export interface KeyboardState {
   typedKey?: KeyboardKey;
   keyRows: KeyboardRow[];
   stringToType: string;
-};
+}
 
 export const initialState: KeyboardState = {
   nextKeyToType: undefined,

@@ -1,5 +1,6 @@
 name: Angular GitHub CI
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
@@ -39,10 +40,10 @@ jobs:
           npm ci
       - name: Build
         run: |
-          npm run build -- --prod
+          ng build --configuration production --aot
       - name: Lint
         run: |
           npm run lint
       - name: Test
         run: |
-          npm run test -- --prod
+          ng test

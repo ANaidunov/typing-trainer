@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { KeyboardState, keyRowsSelector } from 'src/app/store/keyboard/keyboard.state';
@@ -11,14 +11,10 @@ export type KeyboardRow = KeyboardKey[];
   styleUrls: ['./keyboard-monitor.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class KeyboardMonitorComponent implements OnInit {
+export class KeyboardMonitorComponent {
   public keyRows$: Observable<KeyboardRow[]>;
 
   constructor(private store: Store<KeyboardState>) {
     this.keyRows$ = this.store.select(keyRowsSelector);
   }
-
-  ngOnInit(): void {
-  }
-
 }

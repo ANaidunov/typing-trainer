@@ -11,7 +11,7 @@ import { KeyboardState } from '../store/keyboard/keyboard.state';
 export interface State {
   keyboard: KeyboardState;
   statistics: StatisticsState;
-};
+}
 
 export const reducers: ActionReducerMap<State> = {
   keyboard: keyboardReducer,

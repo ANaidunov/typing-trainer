@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-typing-progress-bar',
@@ -11,12 +11,10 @@ export class TypingProgressBarComponent implements OnChanges {
   @Input() alreadyTypedSymbolsCount: number | null = 0;
   progress = 0;
 
-  constructor() {}
-
   ngOnChanges(): void {
     if (this.alreadyTypedSymbolsCount !== null && this.allSymbolsToTypeCount) {
       console.log(`typed ${this.alreadyTypedSymbolsCount} all ${this.allSymbolsToTypeCount}`);
       this.progress = (this.alreadyTypedSymbolsCount / this.allSymbolsToTypeCount) * 100;
     }
-  };
+  }
 }
