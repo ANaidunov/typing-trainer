@@ -1,10 +1,14 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
 
+export interface Result {
+  speed: number,
+  text: string,
+};
 export interface StatisticsState {
   time: number;
   wordsLength: number;
   currentSymbolsCount: number;
-  results: string[];
+  results: Result[];
 };
 
 export const initialState: StatisticsState = {

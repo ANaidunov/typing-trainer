@@ -17,7 +17,8 @@ export class StatisticsEffects {
     map(interval => interval.interval / 60000),
     withLatestFrom(this.store.pipe(select(wordsLengthSelector))),
     tap(([time, length]) => {
-      this.store.dispatch(addResult({ result: `speed is ${(length / time).toFixed(2)} symbols/min` }));
+      const speed = (length / time);
+      this.store.dispatch(addResult({ result: { speed: speed, text: `Speed is ${speed.toFixed(2)} symbols/min` } }));
     })
   ), { dispatch: false });
 }

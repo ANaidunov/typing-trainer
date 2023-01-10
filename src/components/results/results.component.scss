@@ -2,6 +2,43 @@
   display: block;
 }
 
-.result-card {
+.result {
+  display: flex;
+}
+
+.result-card,
+.result-card-under {
   margin: 1em;
+  width: 50%;
+  transition: all 0.5s;
+}
+
+.result-card {
+  z-index: 1;
+  transform: translateX(50%);
+}
+
+.result-card-under {
+  z-index: -1;
+  transform: translateX(-50%);
+}
+
+.result:hover .result-card {
+  transform: translateX(0);
+}
+
+.result:hover .result-card-under {
+  transform: translateX(-10%);
+}
+
+.result-card-under:has(.result-great) {
+  background-color: rgb(5, 245, 113);
+}
+
+.result-card-under:has(.result-avg) {
+  background-color: rgb(231, 255, 47);
+}
+
+.result-card-under:has(.result-low) {
+  background-color: rgb(255, 55, 55);
 }

@@ -1,5 +1,5 @@
 import { Observable } from 'rxjs';
-import { resultsSelector } from './../../app/store/statistics/statistics.state';
+import { resultsSelector, Result } from './../../app/store/statistics/statistics.state';
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { StatisticsState } from 'src/app/store/statistics/statistics.state';
@@ -11,7 +11,7 @@ import { StatisticsState } from 'src/app/store/statistics/statistics.state';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResultsComponent implements OnInit {
-  results$?: Observable<string[]>;
+  results$?: Observable<Result[]>;
 
   constructor(private store: Store<StatisticsState>) {}
 

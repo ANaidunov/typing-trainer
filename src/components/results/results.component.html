@@ -1,8 +1,28 @@
 <ng-container *ngFor="let result of results$ | async; let index = index">
-  <mat-card class="result-card">
-    <mat-card-header>
-      <mat-card-title>Result {{index + 1}}</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>{{result}}</mat-card-content>
-  </mat-card>
+  <div class="result">
+    <mat-card class="result-card">
+      <mat-card-header>
+        <mat-card-title>Result {{index + 1}}</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>{{result.text}}</mat-card-content>
+      </mat-card>
+
+      <mat-card class="result-card-under">
+        <mat-card-header>
+          <mat-card-title
+            class="result-great"
+            *ngIf="result.speed >= 150"
+          >Nice job!</mat-card-title>
+          <mat-card-title
+            class="result-avg"
+            *ngIf="result.speed > 80 && result.speed < 150"
+          >Not great, not terrible</mat-card-title>
+          <mat-card-title
+            class="result-low"
+            *ngIf="result.speed <= 80"
+          >Practice practice practice</mat-card-title>
+        </mat-card-header>
+      </mat-card>
+  </div>
+
 </ng-container>
