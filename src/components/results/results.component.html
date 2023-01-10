@@ -1,0 +1,8 @@
+<ng-container *ngFor="let result of results$ | async; let index = index">
+  <mat-card class="result-card">
+    <mat-card-header>
+      <mat-card-title>Result {{index + 1}}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>{{result}}</mat-card-content>
+  </mat-card>
+</ng-container>

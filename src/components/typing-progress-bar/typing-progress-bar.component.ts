@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, Input, OnInit, ChangeDetectionStrategy, OnChanges } from '@angular/core';
 
 @Component({
   selector: 'app-typing-progress-bar',

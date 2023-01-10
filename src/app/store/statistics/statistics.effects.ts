@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { startTimer, stopTimer } from './statistics.actions';
+import { addResult, startTimer, stopTimer } from './statistics.actions';
 import { distinctUntilChanged, filter, map, tap, timeInterval, withLatestFrom } from 'rxjs/operators';
 import { wordsLengthSelector, StatisticsState } from './statistics.state';
 import { select, Store } from '@ngrx/store';
@@ -17,7 +17,7 @@ export class StatisticsEffects {
     map(interval => interval.interval / 60000),
     withLatestFrom(this.store.pipe(select(wordsLengthSelector))),
     tap(([time, length]) => {
-      console.log(`speed is ${length / time} symbols/min`)
+      this.store.dispatch(addResult({ result: `speed is ${(length / time).toFixed(2)} symbols/min` }));
     })
   ), { dispatch: false });
 }
