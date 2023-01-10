@@ -1,6 +1,7 @@
 import { KeyboardEffects } from './store/keyboard/keyboard.effects';
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,6 +15,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { StatisticsEffects } from './store/statistics/statistics.effects';
+import { TypingProgressBarComponent } from '../components/typing-progress-bar/typing-progress-bar.component';
 
 @NgModule({
   declarations: [
@@ -21,11 +23,13 @@ import { StatisticsEffects } from './store/statistics/statistics.effects';
     TickerComponent,
     HighlighterPipe,
     KeyboardMonitorComponent,
-    KeyComponent
+    KeyComponent,
+    TypingProgressBarComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    MatProgressBarModule,
     StoreModule.forRoot(reducers, {
       metaReducers
     }),
