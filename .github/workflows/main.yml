@@ -21,8 +21,7 @@ jobs:
         working-directory: ./typing-trainer
         run: npm install && npm run build
       
-      - name: Deploy
-        uses: JamesIves/github-pages-deploy-action@4.4.1
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4.4.1
         with:
-          branch: gh-pages # The branch the action should deploy to.
           folder: typing-trainer/dist/typing-trainer # The folder the action should deploy. 
