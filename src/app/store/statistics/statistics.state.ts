@@ -15,4 +15,4 @@ export const initialState: StatisticsState = {
 export const featureSelector = createFeatureSelector<StatisticsState>('statistics');
 
 export const wordsLengthSelector = createSelector(featureSelector, state => state.wordsLength);
-export const currentSymbolsCountSelector = createSelector(featureSelector, state => state.currentSymbolsCount);
+export const alreadyTypedSymbolsCountSelector = createSelector(featureSelector, state => state.currentSymbolsCount);

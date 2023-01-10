@@ -6,6 +6,8 @@ $border-input-color: #3b9aff;
 .words-ticker {
   display: flex;
   justify-content: center;
+
+  margin-bottom: 1em;
 }
 
 .words-ticker {
@@ -16,26 +18,24 @@ $border-input-color: #3b9aff;
   border-radius: 2px;
   line-height: 2em;
   font-size: large;
-  font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+  font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+    "Lucida Sans", Arial, sans-serif;
 
-    &.highlighted {
-      animation-name: highlightInput;
-      animation-duration: 1s;
-    }
+  transition: all 1s;
+
+  &.highlighted {
+    background-color: $highlighted-input-color;
   }
+}
 
-  @keyframes highlightInput {
-    0% {
-      background-color: $initial-input-color;
-    }
+.words-ticker-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
-    50% {
-      background-color: $highlighted-input-color;
-    }
-
-    100% {
-      background-color: $initial-input-color;
-    }
+.progress-bar {
+  width: 100%;
 }
 
 ::ng-deep {

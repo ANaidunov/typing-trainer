@@ -1,5 +1,13 @@
-<pre
-  class="words-ticker"
-  [class.highlighted]="isTickerHighlighted"
-  [innerHtml]="stringToType | highlighter:alreadyTypedString:errorCharPosition"
-></pre>
+<div class="words-ticker-wrapper">
+  <pre
+    class="words-ticker"
+    [class.highlighted]="isTickerHighlighted"
+    [innerHtml]="stringToType | highlighter:alreadyTypedString:errorCharPosition"
+    (transitionend)="removeHighlightedClass()"
+  ></pre>
+  <app-typing-progress-bar
+    class="progress-bar"
+    [allSymbolsToTypeCount]="allSymbolsCount$ | async"
+    [alreadyTypedSymbolsCount]="alreadyTypedSymbolsCount$ | async"
+  ></app-typing-progress-bar>
+  </div>

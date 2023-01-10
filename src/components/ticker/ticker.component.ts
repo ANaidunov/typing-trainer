@@ -1,5 +1,8 @@
-import { ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit } from '@angular/core';
-import { Store } from '@ngrx/store';
+import { incrementCurrentSymbolsCount, resetCurrentSymbolsCount } from './../../app/store/statistics/statistics.actions';
+import { Observable, Subscription } from 'rxjs';
+import { alreadyTypedSymbolsCountSelector, wordsLengthSelector } from './../../app/store/statistics/statistics.state';
+import { AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, OnInit, ViewChild, OnDestroy } from '@angular/core';
+import { select, Store } from '@ngrx/store';
 import randomWords from 'random-words';
 import { setKeyState, setTypedKeyState } from 'src/app/store/keyboard/keyboard.actions';
 import { setStringLength, startTimer, stopTimer } from 'src/app/store/statistics/statistics.actions';
@@ -17,6 +20,8 @@ export class TickerComponent implements OnInit {
   errorCharPosition = -1;
   currentCursorPosition = 0;
   isTickerHighlighted = false;
+  alreadyTypedSymbolsCount$?: Observable<number>;
+  allSymbolsCount$?: Observable<number>;
 
   constructor(private store: Store) {}
 
@@ -34,6 +39,7 @@ export class TickerComponent implements OnInit {
       this.errorCharPosition = -1;
       this.highlightKey(this.stringToType.charAt(this.currentCursorPosition));
       this.pushKeyButton(event.key);
+      this.incrementAlreadyTypedSymbolsCount();
     }
     else {
       this.pushKeyButton(event.key);
@@ -46,14 +52,14 @@ export class TickerComponent implements OnInit {
 
   ngOnInit(): void {
     this.generateWords();
+    this.resetStats();
     this.highlightKey(this.stringToType.charAt(this.currentCursorPosition));
+    this.allSymbolsCount$ = this.store.pipe(select(wordsLengthSelector));
+    this.alreadyTypedSymbolsCount$ = this.store.pipe(select(alreadyTypedSymbolsCountSelector));
   }
 
   generateWords() {
-    const wordsToType = randomWords(this.wordsCount);
-    this.stringToType = wordsToType.join(' ');
-    this.store.dispatch(setStringLength({ length: wordsToType.join('').length }));
-    this.store.dispatch(startTimer());
+    this.stringToType = randomWords(this.wordsCount).join(' ');
   }
 
   highlightKey(key: string) {
@@ -68,12 +74,28 @@ export class TickerComponent implements OnInit {
     this.store.dispatch(setTypedKeyState({ pressedKey: { key: key } }));
   }
 
+  incrementAlreadyTypedSymbolsCount() {
+    this.store.dispatch(incrementCurrentSymbolsCount());
+  }
+
+  removeHighlightedClass() {
+    this.isTickerHighlighted = false;
+  }
+
+  resetStats() {
+    this.store.dispatch(setStringLength({ length: this.stringToType.length }));
+    this.store.dispatch(startTimer());
+    this.store.dispatch(resetCurrentSymbolsCount());
+  }
+
   private initValues() {
     this.generateWords();
+    this.resetStats();
+
     this.alreadyTypedString = '';
     this.errorCharPosition = -1;
     this.currentCursorPosition = 0;
 
-    this.isTickerHighlighted = !this.isTickerHighlighted;
+    this.isTickerHighlighted = true;
   }
 }
