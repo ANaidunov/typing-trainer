@@ -1,5 +1,9 @@
 # TypingTrainer
 
+This is simple typing trainer. 
+It show your speed results, and give hints for next key to type. 
+Typing speed measured on every typed string.
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 11.2.8.
 
 ## Development server
