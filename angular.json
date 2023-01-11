@@ -20,7 +20,6 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "baseHref": "/typing-trainer/",
             "outputPath": "dist/typing-trainer",
             "index": "src/index.html",
             "main": "src/main.ts",
@@ -68,7 +67,8 @@
                   "maximumWarning": "2kb",
                   "maximumError": "4kb"
                 }
-              ]
+              ],
+              "baseHref": "/typing-trainer/"
             }
           },
           "defaultConfiguration": ""
