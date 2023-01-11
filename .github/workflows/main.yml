@@ -44,3 +44,6 @@ jobs:
       - name: Lint
         run: |
           npm run lint
+      - name: Deploy
+        run: |
+          npm run deploy

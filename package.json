@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng deploy"
   },
   "private": true,
   "dependencies": {
@@ -43,6 +44,7 @@
     "@typescript-eslint/eslint-plugin": "5.44.0",
     "@typescript-eslint/parser": "5.44.0",
     "ajv": "^7.2.4",
+    "angular-cli-ghpages": "^1.0.5",
     "codelyzer": "^6.0.0",
     "eslint": "^8.28.0",
     "jasmine-core": "~3.6.0",
